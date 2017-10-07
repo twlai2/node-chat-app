@@ -22,7 +22,8 @@ socket.on('newLocationMessage', message => {
         from: message.from,
         url: message.url,
         createdAt: formattedTime
-    })
+    });
+    jQuery('#messages').append(html);
 });
 
 socket.on('disconnect', function() {

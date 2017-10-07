@@ -25,11 +25,12 @@ io.on('connection', socket => {
         console.log('createMessage', message);
        
         io.emit('newMessage', generateMessage(message.from, message.text));
-        callback('This is ACK from server.');
+        callback && callback('This is ACK from server.');
     });
 
-    socket.on('createLocationMessage', coords => {
+    socket.on('createLocationMessage', (coords, callback) => {
         io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
+        callback && callback();
     });
 
     socket.on('disconnect', () => {

@@ -26,7 +26,12 @@ io.on('connection', socket => {
        
         io.emit('newMessage', generateMessage(message.from, message.text));
         callback('This is ACK from server.');
-    })
+    });
+
+    socket.on('createLocationMessage', message => {
+        io.emit('newMessage', generateMessage('Admin', `${message.latitude}, ${message.longitude}`));
+    });
+
     socket.on('disconnect', () => {
         console.log('Client disconnected from server');
     });
